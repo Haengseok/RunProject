@@ -1,23 +1,25 @@
+import uvicorn
 from fastapi import FastAPI
 
-app = FastAPI()
+from app.common.config import conf
 
+def create_app():
+    
+    #  c = cconf()
+    app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+    # 데이터베이스 이니셜라이즈
 
+    # 레디스 이니셜라이즈
 
-@app.get("/items/{item_id}")
-async def test(item_id: int):
-    return {"item_id": item_id}
+    # 미들웨어 정의
 
+    # 라우터정의
 
-@app.get("/users/me")
-async def read_user_me():
-    return {"user_id": "the current user"}
+    return app
 
+app = create_app()
 
-@app.get("/users/{user_id}")
-async def read_user(user_id: str):
-    return {"user_id": user_id}
+if __name__ == "__main__":
+    # 서버에 올리는 정보들
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=conf().PROJ_RELOAD)
