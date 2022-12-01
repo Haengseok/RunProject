@@ -1,8 +1,8 @@
 from dataclasses import dataclass, asdict
 from os import path, environ
+import json
 
 base_dir = path.dirname(path.dirname(path.dirname(path.abspath(__file__))))
-
 
 @dataclass
 class Config:
@@ -12,12 +12,13 @@ class Config:
 
     DB_POOL_RECYCLE: int = 900
     DB_ECHO: bool = True
-
+   
 
 @dataclass
 class LocalConfig(Config):
     PROJ_RELOAD: bool = True
-    DB_URL: str = ""
+    # mysql+pymysql://[유저이름]:[비밀번호]@[호스트주소]:[포트번호]/[스키마이름]?charset=utf8
+    DB_URL: str = "mysql+pymysql://root:root@localhost:3306/fastAPI?charset=utf8"
 
 
 @dataclass
